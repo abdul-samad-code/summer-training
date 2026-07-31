@@ -37,3 +37,10 @@ if mark >= 90 or sport:
 logged_in = False
 if not logged_in:
     print("Please login ")
+
+print("_________________________________________________________")
+
+# Ternery operator
+age = 20
+result = "abdul" if age >= 18 else "Minor"
+print(result)
