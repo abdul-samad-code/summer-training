@@ -13,3 +13,23 @@ for i in range(1, 6):
 # Example 3
 for i in range(0, 11, 2):
     print(i)
+
+
+print("_______________________________________________________")
+
+
+# Continue Statement
+for i in range(1, 6):
+     if i == 3:
+         continue
+     print(i)
+
+
+print("_________________________________________________")
+
+
+
+for i in range(5):
+    if i == 3:
+        pass
+    print(i)
