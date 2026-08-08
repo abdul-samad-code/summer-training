@@ -9,7 +9,7 @@ def newWindow():
     tk.Label(root, text="this is new window").pack()
     ttk.Button(newWindow, text="close", command=newWindow).pack()
 
-tk.Label(root, text="classic label", font=("Arial", 20)).pack()
+tk.Label(root, text="classic label", font=("Arial", 20, "bold")).pack()
 ttk.Label(root, text="themed label").pack()
 """
 buttonName = ttk.Button(
