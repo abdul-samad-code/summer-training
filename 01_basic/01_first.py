@@ -6,11 +6,7 @@ print("samad",22,"lucknow")
 print("===================Variables===============================")
 
 # This is comment     (single line comment)
-"""
-This is 
-multi line
-commeent
-"""
+
 
 
 #Variables
@@ -94,18 +90,11 @@ print("___________________F-String____________________________")
 
 
 # Constant (Convention)
-#PI = 3.14159
-#MAX_SIZE = 100
-
-
-
-#  F-String
+#PI = 3.14159ng
 name = "abdul"
 age = 41
 print(f"My name is {name} and I am {age} years old.")
 print("______________________________________________________")
-
-
 
 
 
