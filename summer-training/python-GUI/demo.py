@@ -16,7 +16,7 @@ root.geometry(f"{width}x{height}+{x}+{y}")
 
 root.configure(bg="lightblue")    # bg color 
 root.resizable(True, False)
-
+root.destroy()
 root.mainloop()      # it opens the window and wait for user action 
 
 
