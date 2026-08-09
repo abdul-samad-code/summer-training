@@ -5,11 +5,12 @@ root = tk.Tk()
 def newWindow():
     newWindow = tk.Toplevel(root)
     newWindow.title("new window")
-    newWindow.geometry("400x300")
+    newWindow.geometry("700x400")
     tk.Label(root, text="this is new window").pack()
     ttk.Button(newWindow, text="close", command=newWindow).pack()
 
-tk.Label(root, text="classic label", font=("Arial", 20, "bold")).pack()
+tk.Label(root,
+          text="classic label", font=("Arial", 20, "bold italic",), fg="red").pack()
 ttk.Label(root, text="themed label").pack()
 """
 buttonName = ttk.Button(
