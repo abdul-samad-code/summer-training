@@ -26,4 +26,3 @@ button2 = ttk.Button(root, text="themed button",
 button3 = ttk.Button(root, text="open new window",
  command=newWindow).pack()
 root.mainloop()
-
