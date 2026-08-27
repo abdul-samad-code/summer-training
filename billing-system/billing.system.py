@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 
 
-# optional   pdf export
+
 
 # Brand theme constants
 APP_TITLE = "Billing system"
@@ -45,4 +45,63 @@ class Database:
         self._create_tables()
         self._seed_if_empty()
 
-    
+    def _create_tables(self):
+        cur = self.conn.cursor()
+        cur.exe(
+            """
+            CREATE TABLE IF NOT EXISTS products (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                category TEXT DEFALT '',
+                unit TEXT DEFAULT 'pcs',
+                price REAL NOT NULL DEFAULT 0,
+                stock INTEGER NOT NULL DERFAULT 0
+            );
+
+            CREATE TABLES IF NOT EXISTS invoices (
+               id INTEGER PRIMARY KEY AUTOINCREMENT,
+               invoice_no TEXT UNIQUE NOT NULL,
+               customer_name UNIQUE NOT NULL,
+               customer_phone TEXT DEFAULT '',
+               invoice_date TEXT NOT NULL,
+               subtotal REAL NOT NULL
+               descount_percent REAL NOT NULL DEFAULT 0,
+               discount_amount REAL NOT NULL DEFAULT 0,
+               tax_percent REAL NOT NULL DEFAULT 0,
+               tax_amount REAL NOT NULL DEFAULT  0,
+               grand_total REAL NOT NULL,
+               payment_mode TEXT DEFAULT 'Cash',
+            );
+
+
+            CREATE TABLE IF NOT EXISTS invoice_items (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                invoice_id INTEGER NOT NULL REFRENCES invoices (id) ON DELETE CASCADE,
+                product_name TEXT NOT NULL,
+                unit_price REAL NOT NULL,
+                quantity INTEGER NOT NULL,
+                line_total REAL NOT NULL
+            );
+            """
+        )  
+        self.conn.commit() 
+
+    def _seed_if_empty(self):
+        cur = self.conn.execute("SELECT COUNT(*) AS c FROM products")
+        if cur.fetchone()["c"] == 0:
+            sample = [
+                ("HP Keyboard", "Electronics", "pcs", 499.0,40),
+                ("Mouse", "Electronics", "pcs", 199.0,100),
+                ("A4 Notebook (200pg)", "Stationery", "pcs", 60.0, 150),
+                ("Pencil (Box of 10)", "Stationery", "box", 45.0, 200),
+                ("Mechanical Keyboard", "Electronics", "pcs", 2499.0, 15),
+                ("HDMI Cable 2m", "Electronics", "pcs", 349.0, 60),
+                ("Sticky Notes Pad", "Stationery", "pcs", 35.0, 8),
+                ("Laptop Sleeve 15.6\"", "Accessories", "pcs", 799.0, 25),
+            ]
+            self.conn.executemany(
+                "INSERT INTO products (name, category, unit, price, stock) "
+                "VALUES (?, ?, ?, ?, ?)",
+                sample,
+            )
+            self.conn.commit()
